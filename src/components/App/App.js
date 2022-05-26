@@ -9,7 +9,7 @@ class App extends Component{
     super(props)
 
     this.state = {
-      numtiles: 36,
+      numTiles: 36,
       playing: false,
       previousTileIndex: null,
       tiles: [],
