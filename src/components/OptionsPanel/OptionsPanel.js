@@ -3,13 +3,13 @@ import React from 'react'
 import Button from '../Button'
 import TileSelector from '../TileSelector'
 
-const OptionsPanel = () => (
+const OptionsPanel = (props) => (
   <div>
-    <TileSelector />
+    <TileSelector numTiles={props.numTiles}/>
     <Button />
   </div>
 )
-  
-  
+
+
 
 export default OptionsPanel
