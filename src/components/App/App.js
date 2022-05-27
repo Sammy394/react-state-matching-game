@@ -25,9 +25,27 @@ class App extends Component{
       const selectedTileIndex = indexOfSelected(tiles, id, color)
       let previousTileIndex = state.previousTileIndex
 
+
+      if(toBeCleared !== null) {
+        tiles[toBeCleared[0]].selected = false
+        tiles[toBeCleared[1]].selected = false
+        toBeCleared = null
+      }
+
+      tiles[selectedTileIndex].selected = true
+
       if(previousTileIndex !== null) {
         const previousTile = tiles[previousTileIndex]
         const selectedTile = tiles[selectedTileIndex]
+
+        if(previousTile.id !== selectedTile.id && previousTile.Color === color) {
+          selectedTile.matched = true
+          previousTile.matched = true
+          previousTileIndex = null
+        } else {
+          toBeCleared = [previousTileIndex, selectedTileIndex]
+          previousTileIndex = null
+        }
       } else {
         previousTileIndex = selectedTileIndex
       }
@@ -41,7 +59,7 @@ class App extends Component{
       playing: true,
       previousTileIndex: null,
       toBeCleared: null,
-      tiles: createTiles(state.numTiles)
+      tiles: createTiles(state.numTiles, this.handleTileClicked)
     }))
   }
 
