@@ -1,13 +1,18 @@
 import React from 'react'
 import useHover from '../../hooks'
 import './TileSelector.css'
+import GameContext from '../..GameContext'
 
 const TileSelector = (props) => {
 
   const [ref, hovered] = useHover()
 
 
-  const dropdown = hovered ? (
+  return (
+    <GameContext.Consumer>
+    {
+      ({numTiles, handleNumTileChange}) => {
+      const dropdown = hovered ? (
         <div className='tileSelectorContent' >
           <div className='number' onClick={() => props.handleNumTileChange(4)}>4</div>
           <div className='number' onClick={() => props.handleNumTileChange(16)}>16</div>
@@ -23,7 +28,10 @@ const TileSelector = (props) => {
        {dropdown}
      </div>
    </div>
- )
-}
+      )
+    }
+  }
+</GameContext.Consumer>)
+}  
 
 export default TileSelector
